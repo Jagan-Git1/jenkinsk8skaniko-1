@@ -12,6 +12,17 @@ pipeline {
 
   stages {
 
+stage('Checkout Source') {
+      steps {
+        script {
+                    git branch: 'kaniko',
+                        credentialsId: 'jagan-git1',
+                        url: 'https://github.com/Jagan-Git1/jenkinsk8skaniko-1.git'
+                }
+      }
+    }
+	
+	
     stage('Kaniko Build & Push Image') {
       steps {
         container('kaniko') {
@@ -19,7 +30,7 @@ pipeline {
             sh '''
             /kaniko/executor --dockerfile `pwd`/Dockerfile \
                              --context `pwd` \
-                             --destination=justmeandopensource/myweb:${BUILD_NUMBER}
+                             --destination=jagantata1/myweb:${BUILD_NUMBER}
             '''
           }
         }

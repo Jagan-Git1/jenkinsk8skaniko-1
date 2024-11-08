@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: pipeline-demo
+  name: jagan-donttouch
 
 ---
 apiVersion: apps/v1
@@ -11,7 +11,7 @@ metadata:
   labels:
     app: myweb
   name: myweb
-  namespace: pipeline-demo
+  namespace: jagan-donttouch
 spec:
   replicas: 1
   selector:
@@ -23,7 +23,7 @@ spec:
         app: myweb
     spec:
       containers:
-      - image: justmeandopensource/myweb:<TAG>
+      - image: jagantata1/myweb:<TAG>
         imagePullPolicy: Always
         name: myweb
 
@@ -34,13 +34,12 @@ metadata:
   labels:
     app: myweb
   name: myweb
-  namespace: pipeline-demo
+  namespace: jagan-donttouch
 spec:
   ports:
-  - nodePort: 32223
-    port: 80
+  - port: 80
     protocol: TCP
     targetPort: 80
   selector:
     app: myweb
-  type: NodePort
+  type: ClusterIP
